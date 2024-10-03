@@ -1,0 +1,26 @@
+<%- include('partials/header', { title, user, url }) %>
+
+<% if (task) { %>
+  <div class="container mt-4">
+    <div class="card shadow-sm bg-light mb-4">
+      <div class="card-body">
+        <h5 class="card-title"><b><%= task.task %></b></h5>
+        <hr>
+        <p class="card-text"><b>Deadline Date:</b> <%= task.deadline.substring(0, 10) %></p>
+        <p class="card-text"><b>Deadline Time:</b> <%= task.deadline.substring(11, 17) %></p>
+        <p class="card-text"><b>Description:</b> <%= task.description %></p>
+        <p class="card-text"><b>Priority:</b> 
+          <% if (task.priority === 'high') { %>
+            <span class="badge bg-danger">High</span>
+          <% } else if (task.priority === 'medium') { %>
+            <span class="badge bg-warning text-dark">Medium</span>
+          <% } else { %>
+            <span class="badge bg-success">Low</span>
+          <% } %>
+        </p>
+      </div>
+    </div>
+  </div>
+<% } %>
+
+<%- include('partials/footer') %>

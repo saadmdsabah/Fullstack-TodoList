@@ -1,0 +1,43 @@
+<%- include('partials/header', { title, user, url }) %>
+
+<style>
+    .register-container {
+        border-radius: 10px; /* Rounded corners */
+        padding: 20px; /* Padding inside the border */
+        background-color: #f8f9fa; /* Light background color */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    }
+
+    .register-container img {
+        display: block; /* Makes image behave as a block element */
+        margin-left: auto; /* Automatically centers on the left */
+        margin-right: auto; /* Automatically centers on the right */
+    }
+</style>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-4"> <!-- Reduced width to 4 columns -->
+            <div class="register-container">
+                <img src="<%=url%>" alt="application logo" width="70px" height="70px">
+                <form action="/register" method="post" class="mb-3">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" name="username" id="username" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" name="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" name="password" id="password" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

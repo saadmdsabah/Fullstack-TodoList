@@ -1,0 +1,52 @@
+<%- include('partials/header', { title, user, url }) %>
+<style>
+    .login-container {
+        border-radius: 10px; /* Rounded corners */
+        padding: 20px; /* Padding inside the border */
+        background-color: #f8f9fa; /* Light background color */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    }
+
+    .login-container img {
+        display: block; /* Makes image behave as a block element */
+        margin-left: auto; /* Automatically centers on the left */
+        margin-right: auto; /* Automatically centers on the right */
+    }
+
+    .forgot-password {
+        display: block; /* Make it a block element */
+        margin-top: 10px; /* Space above the link */
+        text-align: center; /* Center align */
+        font-weight: 500; /* Slightly bold */
+        color: #007bff; /* Primary link color */
+        text-decoration: none; /* Remove underline */
+    }
+
+    .forgot-password:hover {
+        text-decoration: underline; /* Underline on hover */
+        color: #0056b3; /* Darker blue on hover */
+    }
+</style>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-4"> <!-- Reduced width to 4 columns -->
+            <div class="login-container">
+                <img src="<%=url%>" alt="application logo" width="70px" height="70px">
+                <form action="/login" method="post" class="mb-3">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" name="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" name="password" id="password" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                </form>
+                <p class="text-center">Don't have an account? <a href="/register" class="link-primary">Register</a></p>
+                <a href="/forgot-password" class="forgot-password">Forgot Password?</a>
+            </div>
+        </div>
+    </div>
+</div>

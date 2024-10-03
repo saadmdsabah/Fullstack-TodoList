@@ -1,0 +1,35 @@
+<%- include('partials/header', { title, user, url }) %>
+
+<div class="container mt-4">
+  <% if (list && list.length > 0) { %> 
+    <% list.forEach((task) => { %>
+    <div 
+      class="card mb-3 shadow
+      <% if (task.priority === 'high') { %> bg-danger text-white 
+      <% } else if (task.priority === 'medium') { %> bg-warning text-dark 
+      <% } else { %> bg-success text-white <% } %>"
+    >
+      <div class="card-body">
+        <h5 class="card-title"><b><%= task.task %></b></h5>
+        <p class="card-text"><b>Deadline Date:</b> <%= task.deadline.substring(0, 10) %></p>
+        <p class="card-text"><b>Deadline Time:</b> <%= task.deadline.substring(11, 17) %></p>
+        <div class="d-flex justify-content-between align-items-center">
+          <a href="/<%= task._id %>/details" class="btn btn-light btn-sm">Details</a>
+          <div class="d-flex">
+            <form action="/<%= task._id %>/complete?_method=DELETE" method="POST" class="me-2">
+              <button type="submit" class="btn btn-light btn-sm">Mark as Complete</button>
+            </form>
+            <a href="/<%= task._id %>/edit" class="btn btn-light btn-sm">Edit</a> <!-- Edit button styled -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <% }) %> 
+  <% } else { %>
+    <div class="alert alert-warning" role="alert">
+      No tasks available.
+    </div>
+  <% } %>
+</div>
+
+<%- include('partials/footer') %>

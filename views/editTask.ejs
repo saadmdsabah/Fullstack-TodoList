@@ -1,0 +1,67 @@
+<%- include('partials/header', { title, user, url }) %>
+
+<style>
+    .task-container {
+        border-radius: 10px; /* Rounded corners */
+        padding: 20px; /* Padding inside the border */
+        background-color: #f8f9fa; /* Light background color */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        margin-bottom: 50px;
+    }
+</style>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-4"> <!-- Reduced width to 4 columns -->
+            <div class="task-container">
+                <form action="/<%=id%>/edit?_method=PUT" method="POST" class="mb-3">
+                    <% if(task){ %>
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" name="task" id="title" class="form-control" value="<%=task.task%>" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Task Details:</label>
+                        <textarea
+                            id="description"
+                            name="description"
+                            rows="4"
+                            class="form-control"
+                            required
+                        ><%=task.description%></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="deadline" class="form-label">Due Date & Time:</label>
+                        <input type="datetime-local" id="deadline" name="deadline" class="form-control" value="<%=task.deadline%>" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="priority" class="form-label">Priority</label>
+                        <select name="priority" id="priority" class="form-select" required>
+                            <% if(task.priority === 'high') { %>
+                                <option value="high" selected>High</option>
+                                <option value="medium">Medium</option>
+                                <option value="low">Low</option>
+                            <% } else if(task.priority === 'medium') { %>
+                                <option value="medium" selected>Medium</option>
+                                <option value="high">High</option>
+                                <option value="low">Low</option>
+                            <% } else { %>
+                                <option value="low" selected>Low</option>
+                                <option value="high">High</option>
+                                <option value="medium">Medium</option>
+                            <% } %>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Edit Task</button>
+                    <% } %>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

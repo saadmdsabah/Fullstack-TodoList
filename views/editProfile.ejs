@@ -1,0 +1,42 @@
+<%- include('partials/header', { title, user, url }) %>
+
+<style>
+    .profile-container {
+        border-radius: 10px; /* Rounded corners */
+        padding: 20px; /* Padding inside the border */
+        background-color: #f8f9fa; /* Light background color */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    }
+
+    label {
+        margin-bottom: 5px;
+        font-weight: bold;
+        display: block;
+        text-align: center;
+    }
+</style>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-4"> <!-- Reduced width to 4 columns -->
+            <div class="profile-container">
+                <h3 class="mb-4 text-center">Edit Profile</h3>
+                <form action="/edit/profile?_method=PUT" method="POST" class="mb-3" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <input type="text" id="username" name="username" class="form-control" value="<%= user.username %>" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" id="email" name="email" class="form-control" value="<%= user.email %>" required>
+                    </div>
+
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="file" name="file" class="file-upload-input">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 mt-3">Edit</button>
+                    <a href="/profile" class="btn btn-secondary w-100 mt-2">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

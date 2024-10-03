@@ -1,0 +1,77 @@
+<%- include('partials/header', { title, user, url }) %>
+<style>
+    .profile-card {
+        border: 2px solid #007bff; /* Border color */
+        border-radius: 12px; /* Rounded corners */
+        background-color: #ffffff; /* White background */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        padding: 20px; /* Padding inside the card */
+        max-width: 400px; /* Set a maximum width for the card */
+        margin: auto; /* Center the card */
+        text-align: center; /* Center content inside card */
+    }
+    .card-title {
+        text-align: center; /* Center title */
+        font-size: 1.75rem; /* Title font size */
+        color: #007bff; /* Title color */
+        margin-bottom: 15px; /* Space below the title */
+        font-weight: bold; /* Bold title */
+    }
+    .list-group-item {
+        background-color: #f8f9fa; /* Light background for list items */
+        border: none; /* Remove borders from list items */
+        padding: 12px; /* Padding for each list item */
+        font-size: 1rem; /* Font size for list items */
+        border-radius: 8px; /* Rounded corners for list items */
+        margin-bottom: 8px; /* Space between list items */
+    }
+    .strong {
+        font-weight: bold; /* Bold text for labels */
+        color: #333; /* Darker color for labels */
+    }
+    .text-center {
+        text-align: center; /* Centered text for empty state */
+        font-size: 1rem; /* Font size for better visibility */
+        color: #666; /* Softer color for empty state text */
+    }
+    /* Styling for profile image */
+    .profile-img {
+        display: block; /* Ensure image is a block-level element */
+        margin: 0 auto 20px; /* Center the image and add space below */
+        border-radius: 50%; /* Make the image circular */
+        width: 150px; /* Set fixed width */
+        height: 150px; /* Set fixed height */
+        object-fit: fill; /* Ensure the image is properly contained */
+    }
+</style>
+
+<div class="container mt-4">
+    <% if (user) { %>
+    <div class="card profile-card mb-4">
+        <img src="<%= user.profilePic %>" class="profile-img" alt="Profile Picture">
+        <h3 class="card-title"><%= user.username %></h3>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <span class="strong">Email:</span> <%= user.email %>
+            </li>
+            <li class="list-group-item">
+                <span class="strong">Upcoming Deadline:</span> 
+                <% if (error) { %>
+                    <%= nextdeadline %>
+                <% } else { %>
+                    <%= nextdeadline.substring(0, 10) %> at <%= nextdeadline.substring(11, 19) %>
+                <% } %>
+            </li>
+            <li class="list-group-item">
+                <span class="strong">Pending Tasks:</span> <%= user.list.length %>
+            </li>
+            <li class="list-group-item">
+                <span class="strong">Joining Date:</span> <%= user.createdAt.toLocaleDateString() %>
+            </li>
+        </ul>
+        <a href="/edit/profile" class="btn btn-light">Edit</a>
+    </div>
+    <% } %>
+</div>
+
+<%- include('partials/footer') %>
