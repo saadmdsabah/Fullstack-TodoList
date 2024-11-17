@@ -73,7 +73,7 @@ http://localhost:3000
 
 ### Pull the Image from Docker: 
 ```bash
-docker push saadsabahuddin/mern-fullstack-todolist
+docker pull saadsabahuddin/mern-fullstack-todolist:latest
 ```
 
 ### Run the Docker Image: 
