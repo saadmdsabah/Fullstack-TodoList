@@ -41,7 +41,7 @@ async function registerPost(req, res){
   try {
     const userFound = await User.findOne({ email });
     if (userFound) {
-      res.render("register");
+      res.redirect("/login");
     } else {
       const hashedPassword = await bcrypt.hash(password, 10);
       const user = new User({
