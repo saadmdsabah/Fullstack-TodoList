@@ -1,4 +1,4 @@
-const {User, List} = require("../model/models");
+const { User, List } = require("../model/models");
 const sortUserListByDeadline = require("../controllers/sorting");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
@@ -14,7 +14,7 @@ const login = (req, res) => {
   });
 };
 
-async function home(req, res){
+async function home(req, res) {
   const userFound = await User.findOne({ email: req.user.email });
   await userFound.populate("list");
   const userList = userFound.list;
@@ -26,7 +26,7 @@ async function home(req, res){
     user: req.user,
     url: process.env.LOGO_URL,
   });
-};
+}
 
 const register = (req, res) => {
   res.render("register", {
@@ -36,12 +36,12 @@ const register = (req, res) => {
   });
 };
 
-async function registerPost(req, res){
+async function registerPost(req, res) {
   const { username, email, password } = req.body;
   try {
     const userFound = await User.findOne({ email });
     if (userFound) {
-      res.render("register");
+      res.redirect("/login");
     } else {
       const hashedPassword = await bcrypt.hash(password, 10);
       const user = new User({
@@ -55,7 +55,7 @@ async function registerPost(req, res){
   } catch (error) {
     console.log(error);
   }
-};
+}
 
 const addTask = (req, res) => {
   res.render("add", {
@@ -82,7 +82,7 @@ async function addTaskPost(req, res) {
   userFound.list.push(newList._id);
   await userFound.save();
   res.redirect("/");
-};
+}
 
 async function taskDetails(req, res) {
   const id = req.params.id;
@@ -93,7 +93,7 @@ async function taskDetails(req, res) {
     user: req.user,
     url: process.env.LOGO_URL,
   });
-};
+}
 
 async function markAsCompleted(req, res) {
   const id = req.params.id;
@@ -118,7 +118,7 @@ async function markAsCompleted(req, res) {
     console.log(error.message);
   }
   res.redirect("/");
-};
+}
 
 async function getProfile(req, res) {
   const userid = req.user._id;
@@ -145,7 +145,7 @@ async function getProfile(req, res) {
     user: req.user,
     url: process.env.LOGO_URL,
   });
-};
+}
 
 module.exports = {
   login,
